@@ -97,7 +97,10 @@ class MqttClient{
     // store message in cache
     std::string topicName(topic);
     if (cache.count(topicName)){
-    	cache[topicName]->setVal(payload);
+      if (!payload)
+        cache[topicName]->setVal("");
+      else
+    	  cache[topicName]->setVal(payload);
       cache[topicName]->setSubscribe(true);
     }
   }
